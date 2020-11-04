@@ -32,6 +32,7 @@ namespace AmongUsSoR
 
 			RoguePatcher patcher = new RoguePatcher(this, GetType());
 			patcher.Postfix(typeof(AudioHandler), nameof(AudioHandler.SetupDics));
+			// RogueUtilities.ConvertToAudioClip doesn't work!
 
 			killSprite = RogueUtilities.ConvertToSprite(Properties.Resources.Kill);
 			ventSprite = RogueUtilities.ConvertToSprite(Properties.Resources.Vent);
@@ -69,6 +70,8 @@ namespace AmongUsSoR
 					}
 				}
 			};
+
+			// Internal abilities, used only for special ability indicators
 
 			abilityVent = RogueLibs.CreateCustomAbility("AmongUsVentInternal", ventSprite, false,
 				new CustomNameInfo(""),
@@ -226,6 +229,7 @@ namespace AmongUsSoR
 			if (__instance.agent.oma.hidden)
 				__instance.BecomeNotHidden();
 		}
+
 		public static void OnPressedAbility(InvItem item, Agent myAgent)
 		{
 			bool client = item.gc.multiplayer && !item.gc.serverPlayer && myAgent.isPlayer == 0;
